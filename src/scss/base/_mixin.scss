@@ -1,0 +1,29 @@
+//メディアクエリの設定
+$screen-xl: 1200px;
+$screen-lg: 992px;
+$screen-md: 768px;
+$screen-sm: 544px;
+$screen-xs: 480px;
+$bp-list: (
+ xs: screen and (max-width: #{$screen-xs}),
+ sm: screen and (max-width: #{$screen-sm}),
+ md: screen and (max-width: #{$screen-md}),
+ lg: screen and (max-width: #{$screen-lg}),
+ xl: screen and (max-width: #{$screen-xl})
+) !default;
+
+@mixin mq($breakpoint) {
+  @media #{map-get($bp-list, $breakpoint)} {
+    @content;
+  }
+}
+
+@function get_vw($size, $viewport:320){
+  $rate: 100 / $viewport;
+  @return $rate * $size * 1vw;
+}
+
+@mixin fz_vw($font_size:10){
+  font-size: $font_size * 1px;
+  font-size: get_vw($font_size);
+}
