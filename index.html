@@ -27,7 +27,9 @@
 
   <section id="app">
     <header class="header">
-      <h1 class="title">TaskList</h1>
+      <h1 class="title">
+          TaskList
+      </h1>
     </header>
     <!-- /.header -->
     <main class="contents" role="main" >
@@ -121,14 +123,7 @@
       <section class="nothing"  v-show="!tasks.length">
         <div class="wrapper">
           <p>
-            <span 
-              v-for="(t,index) in nothingTitle"
-              :key="index"
-              :v-text="t"
-              :style="{animationDelay:index*30+'ms'}"
-              class="item"
-              >
-            </span>
+            I have nothing to do..
           </p>
         </div>
       </section>
