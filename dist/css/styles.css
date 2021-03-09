@@ -305,6 +305,31 @@ img {
 }
 
 /*--------------------------------------------------------------------- 
+* list アニメーション
+----------------------------------------------------------------------*/
+.list-enter {
+  opacity: 0;
+}
+
+.list-enter-active {
+  -webkit-transition: opacity 0.5s;
+  transition: opacity 0.5s;
+}
+
+.list-enter-to {
+  opacity: 1;
+}
+
+.list-leave-active {
+  -webkit-transition: opacity 0.5s;
+  transition: opacity 0.5s;
+}
+
+.list-leave-to {
+  opacity: 0;
+}
+
+/*--------------------------------------------------------------------- 
 * main - footer
 ----------------------------------------------------------------------*/
 .main-footer {
@@ -373,6 +398,27 @@ img {
 
 .main-footer .clear-complte {
   float: right;
+}
+
+/*--------------------------------------------------------------------- 
+* task-list-containe アニメーション
+----------------------------------------------------------------------*/
+.task-section-enter,
+.task-section-leave-to {
+  opacity: 0;
+  -webkit-transform: translateX(-30px);
+          transform: translateX(-30px);
+}
+
+.task-section-enter-to,
+.task-section-leave {
+  opacity: 1;
+}
+
+.task-section-active,
+.task-section-leave-active {
+  -webkit-transition: all 1000ms;
+  transition: all 1000ms;
 }
 
 /*--------------------------------------------------------------------- 

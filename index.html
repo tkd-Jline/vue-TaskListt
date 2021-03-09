@@ -17,6 +17,7 @@
   [v-cloak] {
     display: none;
   }
+
 </style>
 <script src="https://unpkg.com/vue/dist/vue.js"></script>
 
@@ -47,7 +48,8 @@
         </div>
       </section>
 
-      <section class="task-list-container" v-show="tasks.length" v-cloak>
+     
+      <section class="task-list-container" v-if="tasks.length" v-cloak>
         <div class="wrapper">
           <div class="all-check">
             <input type="checkbox"  id="toggle-all" v-model="allDone">
@@ -71,7 +73,7 @@
                   <button class="edit-btn" @click="editTask(task)" title="再編集ボタン">
                     <i class="fas fa-edit"></i>
                   </button>
-                  <button class="destroy" @click="removeTask" title="削除ボタン">
+                  <button class="destroy" @click="removeTask(task)" title="削除ボタン">
                     <i class="fas fa-trash-alt"></i>
                   </button>
                 </div>
@@ -93,6 +95,7 @@
         </div>
         <!-- /.wrapper -->
       </section>
+    
 
       <footer class="main-footer"  v-show="tasks.length" v-cloak>
         <div class="wrapper">
@@ -100,8 +103,6 @@
            <strong>{{remaining}}</strong> {{remaining | pluralize }} left
           </div>
           <!-- /.task-count -->
-
-
 
           <ul class="filters">
             <li class="sort-btn" :class= "{selected: visibility == 'all'}" ><a href="#/all">All</a></li>
@@ -120,13 +121,24 @@
         </div>
       </footer>
 
-      <section class="nothing"  v-show="!tasks.length">
-        <div class="wrapper">
-          <p>
-            I have nothing to do..
-          </p>
-        </div>
-      </section>
+      <transition name="nothing" mode="out-in">
+        <section class="nothing"  v-if="!tasks.length">
+          <div class="wrapper">
+            <p>
+              <!-- <span 
+                v-for="(t,index) in nothingTitle"
+                :key="index"
+                :v-text="t"
+                :style="{animationDelay:index*30+'ms'}"
+                class="item"
+                >
+              </span> -->
+              I have nothing to do..
+            </p>
+          </div>
+        </section>
+
+      </transition>
 
     </main>
     <!-- /.contents -->

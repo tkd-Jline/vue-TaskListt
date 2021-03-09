@@ -93,6 +93,7 @@ var taskApp = new Vue({
     },
     //タスクを削除
     removeTask: function removeTask(task) {
+      console.log(task);
       this.tasks.splice(this.tasks.indexOf(task), 1);
       taskStorage.save(this.tasks);
     },
