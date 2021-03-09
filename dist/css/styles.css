@@ -463,12 +463,28 @@ img {
   float: right;
 }
 
+.main-footer .clear-complte button {
+  position: relative;
+  -webkit-transition: all .3s;
+  transition: all .3s;
+}
+
+.main-footer .clear-complte:hover button {
+  color: #fd5f00;
+  top: -3px;
+  text-shadow: #13334c 2px 2px 2px;
+}
+
+.main-footer .clear-complte:active button {
+  top: 0;
+}
+
 /*--------------------------------------------------------------------- 
 * main - .clear-complte アニメーション
 ----------------------------------------------------------------------*/
 .complte-enter-active, .complte-leave-active {
-  -webkit-transition: 500ms;
-  transition: 500ms;
+  -webkit-transition: 300ms;
+  transition: 300ms;
   -webkit-transition-property: opacity, -webkit-transform;
   transition-property: opacity, -webkit-transform;
   transition-property: opacity, transform;
@@ -486,8 +502,8 @@ img {
 }
 
 .complte-leave-to {
-  -webkit-transform: translateY(-50px);
-          transform: translateY(-50px);
+  -webkit-transform: translateY(-30px);
+          transform: translateY(-30px);
   opacity: 0;
 }
 

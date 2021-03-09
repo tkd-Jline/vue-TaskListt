@@ -523,6 +523,21 @@ img {
 
   .clear-complte {
     float: right;
+
+    button {
+      position: relative;
+      transition: all .3s;
+    }
+
+    &:hover button {
+      color: #fd5f00;
+      top: -3px;
+      text-shadow: #13334c 2px 2px 2px;
+    }
+
+    &:active button {
+      top: 0;
+    }
   }
 
 }
@@ -533,7 +548,7 @@ img {
 .complte {
   &-enter-active,
   &-leave-active {
-    transition: 500ms;
+    transition: 300ms;
     transition-property: opacity, transform;
   }
   
@@ -547,7 +562,7 @@ img {
   }
   
   &-leave-to {
-    transform: translateY(-50px);
+    transform: translateY(-30px);
     opacity: 0;
   }
 
