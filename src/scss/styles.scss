@@ -172,6 +172,19 @@ img {
 }
 
 /*--------------------------------------------------------------------- 
+* .tasklist
+----------------------------------------------------------------------*/ 
+.tasklist {
+  position: relative;
+  width: 100%;
+
+  .task-section {
+    position: absolute;
+    width: 100%;
+  }
+}
+
+/*--------------------------------------------------------------------- 
 * .task-list-container
 ----------------------------------------------------------------------*/ 
 .task-list-container {
@@ -369,37 +382,71 @@ img {
 }
 
 /*--------------------------------------------------------------------- 
-* list アニメーション
+* task-list-container アニメーション
 ----------------------------------------------------------------------*/ 
 
-// アニメーション
-.list {
-  // 要素が移動するときのアニメーション設定（基本的にはtransitionにtransformを設定していればいい）
-
-  // 要素が入るときのアニメーション
+.task,
+.main-footer,
+.nothing {
+  
   &-enter {
     opacity: 0;
-    // アニメーションの初期設定（初期値とtransitionを設定する）
-    &-active {
-      transition: opacity 0.5s;
-    }
-    // アニメーション開始（目標のプロパティ値を設定する）
+    transform: translateX(-30px);
+
     &-to {
       opacity: 1;
     }
+
+    &-active {
+      transition: opacity 500ms, transform 500ms;
+    }
   }
 
-  // 要素が消える時のアニメーション
   &-leave {
-    // アニメーションの初期設定
-    &-active {
-      // 要素が消える場合はabsoluteにする（重要！）
-      transition: opacity 0.5s;
-    }
-    // アニメーション開始
+
     &-to {
       opacity: 0;
+      transform: translateX(30px);
     }
+
+    &-active {
+      transition: opacity 500ms, transform 500ms;
+    }
+
+
+  }
+}
+
+
+/*--------------------------------------------------------------------- 
+* .fade アニメーション
+----------------------------------------------------------------------*/ 
+
+.fade {
+
+  &-enter-active,
+  &-leave-active,
+  &-move {
+    transition: 500ms;
+    transition-property: opacity, transform;
+  }
+  
+  &-enter {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  
+  &-enter-to {
+    opacity: 1;
+  }
+  
+  &-leave-active {
+    position: absolute;
+  }
+  
+  &-leave-to {
+    transform: translateX(50px);
+    opacity: 0;
   }
 }
 
@@ -481,25 +528,30 @@ img {
 }
 
 /*--------------------------------------------------------------------- 
-* task-list-containe アニメーション
+* main - .clear-complte アニメーション
 ----------------------------------------------------------------------*/ 
+.complte {
+  &-enter-active,
+  &-leave-active {
+    transition: 500ms;
+    transition-property: opacity, transform;
+  }
+  
+  &-enter {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  
+  &-enter-to {
+    opacity: 1;
+  }
+  
+  &-leave-to {
+    transform: translateY(-50px);
+    opacity: 0;
+  }
 
-.task-section-enter,
-.task-section-leave-to {
-  opacity: 0;
-  transform: translateX(-30px);
 }
-
-.task-section-enter-to,
-.task-section-leave {
-  opacity: 1;
-}
-
-.task-section-active,
-.task-section-leave-active {
-  transition: all 1000ms;
-}
-
 
 
 
@@ -508,6 +560,8 @@ img {
 ----------------------------------------------------------------------*/ 
 
 .nothing {
+  position: absolute;
+  width: 100%;
 
   .wrapper {
     height: calc(100vh-194px);

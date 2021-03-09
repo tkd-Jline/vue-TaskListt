@@ -48,97 +48,115 @@
         </div>
       </section>
 
-     
-      <section class="task-list-container" v-if="tasks.length" v-cloak>
-        <div class="wrapper">
-          <div class="all-check">
-            <input type="checkbox"  id="toggle-all" v-model="allDone">
-            <label for="toggle-all"></label>
-            <label for="toggle-all" class="check-title">All Complete</label>
-          </div>
-          <!-- /.all-check -->
-          <ul class="task-list">
-            <li class="task"
-              :class="{completed: task.completed, editing: task == editedTask }"
-              v-for="task in filterTasks"
-              :key="task.id"
-            >
-              <div class="view">
-                <div class="task-set">
-                  <input type="checkbox" :id="task.id +1" v-model="task.completed">
-                  <label :for="task.id+1"></label>
-                  <label class="task-title"  :for="task.id+1" @dblclick="editTask(task)" >{{task.title}}</label>
-                </div>
-                <div class="button-parts">
-                  <button class="edit-btn" @click="editTask(task)" title="再編集ボタン">
-                    <i class="fas fa-edit"></i>
-                  </button>
-                  <button class="destroy" @click="removeTask(task)" title="削除ボタン">
-                    <i class="fas fa-trash-alt"></i>
-                  </button>
-                </div>
-              </div>
-              <input 
-                type="text" 
-                class="edit"
-                v-model="task.title"
-                v-todo-focus ="task == editedTask"
-                @keypress.enter="doneEdit(task)"
-                @keyup.esc="canselEdit(task)" 
-                @blur="doneEdit(task)"
-                >
+      <section class="tasklist">
 
-            </li>
-
-          </ul>
-          <!-- /.task-list -->
-        </div>
-        <!-- /.wrapper -->
-      </section>
-    
-
-      <footer class="main-footer"  v-show="tasks.length" v-cloak>
-        <div class="wrapper">
-          <div class="task-count">
-           <strong>{{remaining}}</strong> {{remaining | pluralize }} left
-          </div>
-          <!-- /.task-count -->
-
-          <ul class="filters">
-            <li class="sort-btn" :class= "{selected: visibility == 'all'}" ><a href="#/all">All</a></li>
-            <li class="sort-btn" :class= "{selected: visibility == 'active'}" ><a href="#/active">Active</a></li>
-            <li class="sort-btn" :class= "{selected: visibility == 'completed'}" ><a href="#/completed">Completed</a></li>
-          </ul>
-          <!-- /.filters -->
-
-          <div class="clear-complte">
-            <button v-show="tasks.length > remaining" @click="removeCompleted">
-              Clear Complete
-            </button>
-          </div>
-          <!-- /.clear-complte -->
+        <section class="task-section">
           
-        </div>
-      </footer>
+          <transition name="task">
+          <section class="task-list-container" v-if="tasks.length" v-cloak>
+            <div class="wrapper">
+              <div class="all-check">
+                <input type="checkbox"  id="toggle-all" v-model="allDone">
+                <label for="toggle-all"></label>
+                <label for="toggle-all" class="check-title">All Complete</label>
+              </div>
+              <!-- /.all-check -->
+              <transition-group name="fade" class="task-list" tag="ul">
 
-      <transition name="nothing" mode="out-in">
-        <section class="nothing"  v-if="!tasks.length">
-          <div class="wrapper">
-            <p>
-              <!-- <span 
-                v-for="(t,index) in nothingTitle"
-                :key="index"
-                :v-text="t"
-                :style="{animationDelay:index*30+'ms'}"
-                class="item"
+                <li class="task"
+                  :class="{completed: task.completed, editing: task == editedTask }"
+                  v-for="task in filterTasks"
+                  :key="task.id"
                 >
-              </span> -->
-              I have nothing to do..
-            </p>
-          </div>
-        </section>
+                  <div class="view">
+                    <div class="task-set">
+                      <input type="checkbox" :id="task.id +1" v-model="task.completed">
+                      <label :for="task.id+1"></label>
+                      <label class="task-title"  :for="task.id+1" @dblclick="editTask(task)" >{{task.title}}</label>
+                    </div>
+                    <div class="button-parts">
+                      <button class="edit-btn" @click="editTask(task)" title="再編集ボタン">
+                        <i class="fas fa-edit"></i>
+                      </button>
+                      <button class="destroy" @click="removeTask(task)" title="削除ボタン">
+                        <i class="fas fa-trash-alt"></i>
+                      </button>
+                    </div>
+                  </div>
+                  <input 
+                    type="text" 
+                    class="edit"
+                    v-model="task.title"
+                    v-todo-focus ="task == editedTask"
+                    @keypress.enter="doneEdit(task)"
+                    @keyup.esc="canselEdit(task)" 
+                    @blur="doneEdit(task)"
+                    >
+                </li>
+    
+              </transition-group>
+              
+            </div>
+            <!-- /.wrapper -->
+          </section>
+          <!-- /.task-list-container -->
+          </transition>
 
-      </transition>
+          <transition name="main-footer">
+          <footer class="main-footer"  v-show="tasks.length" v-cloak>
+            <div class="wrapper">
+              <div class="task-count">
+                <strong>{{remaining}}</strong> {{remaining | pluralize }} left
+              </div>
+              <!-- /.task-count -->
+    
+              <ul class="filters">
+                <li class="sort-btn" :class= "{selected: visibility == 'all'}" ><a href="#/all">All</a></li>
+                <li class="sort-btn" :class= "{selected: visibility == 'active'}" ><a href="#/active">Active</a></li>
+                
+                <li class="sort-btn" :class= "{selected: visibility == 'completed'}" ><a href="#/completed">Completed</a></li>
+              </ul>
+              <!-- /.filters -->
+    
+              <transition name="complte">
+                <div class="clear-complte" v-show="tasks.length > remaining" v-cloak>
+                  <button  @click="removeCompleted">
+                    Clear Complete
+                  </button>
+                </div>
+                <!-- /.clear-complte -->
+              </transition>
+              
+            </div>
+          </footer>
+            <!-- /.main-footer -->
+          </transition>
+          
+        </section>
+        <!-- /.task-section -->
+        
+   
+        <transition name="nothing" mode="out-in">
+          <section class="nothing"  v-if="!tasks.length">
+            <div class="wrapper">
+              <p>
+                <!-- <span 
+                  v-for="(t,index) in nothingTitle"
+                  :key="index"
+                  :v-text="t"
+                  :style="{animationDelay:index*30+'ms'}"
+                  class="item"
+                  >
+                </span> -->
+                I have nothing to do..
+              </p>
+            </div>
+          </section>
+  
+        </transition>
+      </section>
+      <!-- /.tasklist -->
+      
 
     </main>
     <!-- /.contents -->

@@ -133,6 +133,19 @@ img {
 }
 
 /*--------------------------------------------------------------------- 
+* .tasklist
+----------------------------------------------------------------------*/
+.tasklist {
+  position: relative;
+  width: 100%;
+}
+
+.tasklist .task-section {
+  position: absolute;
+  width: 100%;
+}
+
+/*--------------------------------------------------------------------- 
 * .task-list-container
 ----------------------------------------------------------------------*/
 .task-list-container {
@@ -305,27 +318,77 @@ img {
 }
 
 /*--------------------------------------------------------------------- 
-* list アニメーション
+* task-list-container アニメーション
 ----------------------------------------------------------------------*/
-.list-enter {
+.task-enter,
+.main-footer-enter,
+.nothing-enter {
   opacity: 0;
+  -webkit-transform: translateX(-30px);
+          transform: translateX(-30px);
 }
 
-.list-enter-active {
-  -webkit-transition: opacity 0.5s;
-  transition: opacity 0.5s;
-}
-
-.list-enter-to {
+.task-enter-to,
+.main-footer-enter-to,
+.nothing-enter-to {
   opacity: 1;
 }
 
-.list-leave-active {
-  -webkit-transition: opacity 0.5s;
-  transition: opacity 0.5s;
+.task-enter-active,
+.main-footer-enter-active,
+.nothing-enter-active {
+  -webkit-transition: opacity 500ms, -webkit-transform 500ms;
+  transition: opacity 500ms, -webkit-transform 500ms;
+  transition: opacity 500ms, transform 500ms;
+  transition: opacity 500ms, transform 500ms, -webkit-transform 500ms;
 }
 
-.list-leave-to {
+.task-leave-to,
+.main-footer-leave-to,
+.nothing-leave-to {
+  opacity: 0;
+  -webkit-transform: translateX(30px);
+          transform: translateX(30px);
+}
+
+.task-leave-active,
+.main-footer-leave-active,
+.nothing-leave-active {
+  -webkit-transition: opacity 500ms, -webkit-transform 500ms;
+  transition: opacity 500ms, -webkit-transform 500ms;
+  transition: opacity 500ms, transform 500ms;
+  transition: opacity 500ms, transform 500ms, -webkit-transform 500ms;
+}
+
+/*--------------------------------------------------------------------- 
+* .fade アニメーション
+----------------------------------------------------------------------*/
+.fade-enter-active, .fade-leave-active, .fade-move {
+  -webkit-transition: 500ms;
+  transition: 500ms;
+  -webkit-transition-property: opacity, -webkit-transform;
+  transition-property: opacity, -webkit-transform;
+  transition-property: opacity, transform;
+  transition-property: opacity, transform, -webkit-transform;
+}
+
+.fade-enter {
+  opacity: 0;
+  -webkit-transform: translateX(50px);
+          transform: translateX(50px);
+}
+
+.fade-enter-to {
+  opacity: 1;
+}
+
+.fade-leave-active {
+  position: absolute;
+}
+
+.fade-leave-to {
+  -webkit-transform: translateX(50px);
+          transform: translateX(50px);
   opacity: 0;
 }
 
@@ -401,29 +464,41 @@ img {
 }
 
 /*--------------------------------------------------------------------- 
-* task-list-containe アニメーション
+* main - .clear-complte アニメーション
 ----------------------------------------------------------------------*/
-.task-section-enter,
-.task-section-leave-to {
-  opacity: 0;
-  -webkit-transform: translateX(-30px);
-          transform: translateX(-30px);
+.complte-enter-active, .complte-leave-active {
+  -webkit-transition: 500ms;
+  transition: 500ms;
+  -webkit-transition-property: opacity, -webkit-transform;
+  transition-property: opacity, -webkit-transform;
+  transition-property: opacity, transform;
+  transition-property: opacity, transform, -webkit-transform;
 }
 
-.task-section-enter-to,
-.task-section-leave {
+.complte-enter {
+  opacity: 0;
+  -webkit-transform: translateY(50px);
+          transform: translateY(50px);
+}
+
+.complte-enter-to {
   opacity: 1;
 }
 
-.task-section-active,
-.task-section-leave-active {
-  -webkit-transition: all 1000ms;
-  transition: all 1000ms;
+.complte-leave-to {
+  -webkit-transform: translateY(-50px);
+          transform: translateY(-50px);
+  opacity: 0;
 }
 
 /*--------------------------------------------------------------------- 
 * main - .nothing
 ----------------------------------------------------------------------*/
+.nothing {
+  position: absolute;
+  width: 100%;
+}
+
 .nothing .wrapper {
   height: calc(100vh - 194px);
   display: -webkit-box;
