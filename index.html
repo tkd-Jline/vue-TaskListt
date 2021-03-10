@@ -140,15 +140,15 @@
           <section class="nothing"  v-if="!tasks.length">
             <div class="wrapper">
               <p>
-                <!-- <span 
+                <span
+                  class="item"
                   v-for="(t,index) in nothingTitle"
                   :key="index"
-                  :v-text="t"
-                  :style="{animationDelay:index*30+'ms'}"
-                  class="item"
-                  >
-                </span> -->
-                I have nothing to do..
+                  v-text="t"
+                  :style="{animationDelay:index*80+'ms'}"
+                >
+                </span>
+                <!-- {{nothingTitle}} -->
               </p>
             </div>
           </section>
